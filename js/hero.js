@@ -13,7 +13,7 @@ function heroClass() {
     this.revite = 0;
     this.energy = 0;
     this.procCoolDown = 0;
-    this.lastProc = 0;
+    this.lastProc = -5000000;
     this.procCount = 0;
 
     this.setup = function(reviteLevel, speed) {
