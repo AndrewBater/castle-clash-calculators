@@ -11,7 +11,6 @@ function cupidClass() {
         this.procCoolDown = cupidsArrowCooldown;
         this.procCount = 0;
         this.baseAttackSpeed = 1200;
-        celebrateSkill = celebrateLevel[skillLevel];
         arrowSkill = cupidsArrow[skillLevel];
 
         this.superclassSetup("Cupid", reviteLevel, zerkLevel);
@@ -33,4 +32,5 @@ function cupidClass() {
             }
         }
         this.superclassProc(newTime);
-    }}
+    }
+}

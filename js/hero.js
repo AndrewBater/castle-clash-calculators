@@ -17,7 +17,6 @@ function heroClass() {
     this.lastProc = -5000000;
     this.procCount = 0;
     this.zerk = 1;
-    this.cyclone = { timeStart: 0, timeEnd: 0, gain: 0 };
 
     this.setup = function(name, reviteLevel, zerkLevel) {
         this.name = name;
@@ -36,10 +35,6 @@ function heroClass() {
         this.currentAttackSpeed = Math.ceil(speed / 200) * 200;
     }
 
-    this.setCyclone = function(valSkill) {
-        var energyPerTick = (tick * cyclone[valSkill] / cycloneDuration[valSkill]);
-    }
-
     this.update = function(newTime) {
         //first of all set current attack speed
         this.setCurrentAttackSpeed();
@@ -51,7 +46,19 @@ function heroClass() {
             if (this.energy >= 100 && this.lastProc + this.procCoolDown <= newTime) {
                 this.proc(newTime);
             }
+        }
+        this.updateEnergy(newTime);
+    }
+
+    this.updateEnergy = function(currentTime) {
+        if (this.justAttacked) {
             this.energy += 15;
+        }
+        if (cyclone.active && cyclone.timeStart < currentTime && cyclone.timeEnd > currentTime) {
+            this.energy += cyclone.gain;
+        }
+        if (this.energy > 100) {
+            this.energy = 100;
         }
     }
 
