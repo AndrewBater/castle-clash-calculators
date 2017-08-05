@@ -13,7 +13,8 @@ function pumpkinDukeClass() {
         this.procCoolDown = 0;
         this.procCount = 0;
         celebrateSkill = celebrateLevel[skillLevel];
-        this.superclassSetup("Pumpkin Duke", reviteLevel, 1000, zerkLevel);
+
+        this.superclassSetup("Pumpkin Duke", reviteLevel, zerkLevel);
     }
 
     this.superclassUpdate = this.update;

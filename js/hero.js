@@ -18,13 +18,12 @@ function heroClass() {
     this.procCount = 0;
     this.zerk = 1;
 
-    this.setup = function(name, reviteLevel, speed, zerkLevel) {
+    this.setup = function(name, reviteLevel, zerkLevel) {
         this.name = name;
         this.revite = reviteLevel;
         this.energy = REVITE[this.revite];
-        this.baseAttackSpeed = speed;
-        this.currentAttackSpeed = speed;
         this.zerk = ZERK[zerkLevel];
+        this.currentAttackSpeed = this.baseAttackSpeed;
     }
 
     this.setCurrentAttackSpeed = function() {
