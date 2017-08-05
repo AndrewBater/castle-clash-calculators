@@ -5,6 +5,7 @@ const REVITE = [0, 20, 40, 60, 80, 100];
 function heroClass() {
     this.name;
     this.justAttacked = false;
+    this.justProcced = false;
     this.hasAttacked = false;
     this.lastAttack = 0;
     this.baseAttackSpeed = 1000;
@@ -13,6 +14,7 @@ function heroClass() {
     this.energy = 0;
     this.procCoolDown = 0;
     this.lastProc = 0;
+    this.procCount = 0;
 
     this.setup = function(reviteLevel, speed) {
         this.revite = reviteLevel;
@@ -32,15 +34,33 @@ function heroClass() {
             this.justAttacked = true;
             this.hasAttacked = true;
             this.lastAttack = newTime;
+            if (this.energy >= 100 && this.lastProc + this.procCoolDown <= newTime) {
+                this.proc(newTime);
+            }
             this.energy += 15;
         }
     }
 
-    this.getTimeOutputText = function(newTime) {
+    this.proc = function(newTime) {
+        this.lastProc = newTime;
+        this.procCount++;
+        this.justProcced = true;
+        this.energy = 0;
+    }
+
+    this.getOutputTextForNewTime = function(newTime) {
         this.justAttacked = false;
+        this.justProcced = false;
         this.update(newTime);
+        var outputText = "";
         if (this.justAttacked) {
-            return (this.name + " attacked, new energy " + this.energy + ". ");
-        } else { return ""; }
+            outputText = this.name + " attacked ";
+            if (this.justProcced) {
+                outputText += "and procced. " + this.procCount + " total. ";
+            } else {
+                outputText += " new energy: " + this.energy + ". ";
+            }
+        }
+        return outputText;
     }
 }
