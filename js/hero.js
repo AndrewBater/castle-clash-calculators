@@ -23,7 +23,17 @@ function heroClass() {
         this.currentAttackSpeed = speed;
     }
 
+    this.setCurrentAttackSpeed = function() {
+        var speed = this.baseAttackSpeed;
+        for (var i = 0; i < celebrateInstance.length; i++) {
+            speed = speed / celebrateSkill;
+        }
+        this.currentAttackSpeed = Math.ceil(speed / 200) * 200;
+    }
+
     this.update = function(newTime) {
+        //first of all set current attack speed
+        this.setCurrentAttackSpeed();
         if (this.hasAttacked) {
             if (this.lastAttack + this.currentAttackSpeed <= newTime) {
                 this.hasAttacked = false;
