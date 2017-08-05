@@ -35,6 +35,7 @@ function setupHeroes() {
     PD.name = "PD";
     heroList.push(PD);
     var cupid = new heroClass();
-    cupid.name = "Cupid"
+    cupid.name = "Cupid";
+    cupid.setup(5, 1200);
     heroList.push(cupid);
 }
