@@ -7,13 +7,12 @@ var arrowSkill = 0;
 cupidClass.prototype = new heroClass();
 function cupidClass() {
     this.superclassSetup = this.setup;
-    this.setup = function(reviteLevel, skillLevel) {
-        this.name = "Cupid";
+    this.setup = function(reviteLevel, skillLevel, zerkLevel) {
         this.procCoolDown = cupidsArrowCooldown;
         this.procCount = 0;
         celebrateSkill = celebrateLevel[skillLevel];
         arrowSkill = cupidsArrow[skillLevel];
-        this.superclassSetup(reviteLevel, 1200);
+        this.superclassSetup("Cupid", reviteLevel, 1200, zerkLevel);
     }
 
     this.superclassUpdate = this.update;

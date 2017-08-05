@@ -1,6 +1,7 @@
 "use strict";
 
 const REVITE = [0, 20, 40, 60, 80, 100];
+const ZERK = [1, 1.1, 1.15, 1.2, 1.25, 1.3, 1.4, 1.5, 1.7];
 
 function heroClass() {
     this.name;
@@ -15,12 +16,15 @@ function heroClass() {
     this.procCoolDown = 0;
     this.lastProc = -5000000;
     this.procCount = 0;
+    this.zerk = 1;
 
-    this.setup = function(reviteLevel, speed) {
+    this.setup = function(name, reviteLevel, speed, zerkLevel) {
+        this.name = name;
         this.revite = reviteLevel;
         this.energy = REVITE[this.revite];
         this.baseAttackSpeed = speed;
         this.currentAttackSpeed = speed;
+        this.zerk = ZERK[zerkLevel];
     }
 
     this.setCurrentAttackSpeed = function() {
@@ -28,6 +32,7 @@ function heroClass() {
         for (var i = 0; i < celebrateInstance.length; i++) {
             speed = speed / celebrateSkill;
         }
+        var speed = speed / this.zerk;
         this.currentAttackSpeed = Math.ceil(speed / 200) * 200;
     }
 

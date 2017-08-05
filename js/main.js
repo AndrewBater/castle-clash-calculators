@@ -36,9 +36,9 @@ function runBattle() {
 function setupHeroes() {
     heroList = [];
     var PD = new pumpkinDukeClass();
-    PD.setup(5, 9);
+    PD.setup(5, 9, 8);
     heroList.push(PD);
     var cupid = new cupidClass();
-    cupid.setup(5, 9);
+    cupid.setup(5, 9, 0);
     heroList.push(cupid);
 }

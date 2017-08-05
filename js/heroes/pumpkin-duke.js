@@ -8,13 +8,12 @@ var celebrateSkill = 0;
 pumpkinDukeClass.prototype = new heroClass();
 function pumpkinDukeClass() {
     this.superclassSetup = this.setup;
-    this.setup = function(reviteLevel, skillLevel) {
-        this.name = "Pumpkin Duke";
+    this.setup = function(reviteLevel, skillLevel, zerkLevel) {
         this.energy = 0;
         this.procCoolDown = 0;
         this.procCount = 0;
         celebrateSkill = celebrateLevel[skillLevel];
-        this.superclassSetup(reviteLevel, 1000);
+        this.superclassSetup("Pumpkin Duke", reviteLevel, 1000, zerkLevel);
     }
 
     this.superclassUpdate = this.update;
