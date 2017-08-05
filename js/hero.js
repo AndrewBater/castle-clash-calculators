@@ -8,7 +8,7 @@ function heroClass() {
     this.justAttacked = false;
     this.justProcced = false;
     this.hasAttacked = false;
-    this.lastAttack = 0;
+    this.lastAttack = -50000;
     this.baseAttackSpeed = 1000;
     this.currentAttackSpeed = 1000;
     this.revite = 0;
@@ -17,6 +17,7 @@ function heroClass() {
     this.lastProc = -5000000;
     this.procCount = 0;
     this.zerk = 1;
+    this.cyclone = { timeStart: 0, timeEnd: 0, gain: 0 };
 
     this.setup = function(name, reviteLevel, zerkLevel) {
         this.name = name;
@@ -35,18 +36,17 @@ function heroClass() {
         this.currentAttackSpeed = Math.ceil(speed / 200) * 200;
     }
 
+    this.setCyclone = function(valSkill) {
+        var energyPerTick = (tick * cyclone[valSkill] / cycloneDuration[valSkill]);
+    }
+
     this.update = function(newTime) {
         //first of all set current attack speed
         this.setCurrentAttackSpeed();
-        if (this.hasAttacked) {
-            if (this.lastAttack + this.currentAttackSpeed <= newTime) {
-                this.hasAttacked = false;
-            }
-        }
 
-        if (!this.hasAttacked) {
+        // if the hero is able to attck, call attack function
+        if (this.lastAttack + this.currentAttackSpeed <= newTime) {
             this.justAttacked = true;
-            this.hasAttacked = true;
             this.lastAttack = newTime;
             if (this.energy >= 100 && this.lastProc + this.procCoolDown <= newTime) {
                 this.proc(newTime);
