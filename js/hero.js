@@ -2,6 +2,7 @@
 
 const REVITE = [0, 20, 40, 60, 80, 100];
 const ZERK = [1, 1.1, 1.15, 1.2, 1.25, 1.3, 1.4, 1.5, 1.7];
+const BLITZ = [1, 1.1, 1.15, 1.20, 1.25, 1.3];
 
 function heroClass() {
     this.name;
@@ -17,6 +18,7 @@ function heroClass() {
     this.lastProc = -5000000;
     this.procCount = 0;
     this.zerk = 1;
+    this.blitz = 0;
 
     this.setup = function(name, reviteLevel, zerkLevel) {
         this.name = name;
@@ -31,7 +33,8 @@ function heroClass() {
         for (var i = 0; i < celebrateInstance.length; i++) {
             speed = speed / celebrateSkill;
         }
-        var speed = speed / this.zerk;
+        speed = speed / this.zerk;
+        speed = speed / BLITZ[this.blitz];
         this.currentAttackSpeed = Math.ceil(speed / 200) * 200;
     }
 
@@ -77,10 +80,9 @@ function heroClass() {
         if (this.justAttacked) {
             outputText = this.name + " attacked ";
             if (this.justProcced) {
-                outputText += "and procced. " + this.procCount + " total. ";
-            } else {
-                outputText += " new energy: " + this.energy + ". ";
+                outputText += "and procced.";
             }
+            outputText += " E: " + this.energy + ", SPD: " + this.currentAttackSpeed;
         }
         return outputText;
     }
